@@ -1,5 +1,10 @@
+#!/usr/bin/env python3
+
 import tkinter as tk
+from tkinter import ttk
 import re
+
+import buttons
 
 
 class Calculator(tk.Frame):
@@ -7,30 +12,25 @@ class Calculator(tk.Frame):
         self.parent = parent
         parent.title("Calculator")
         parent.geometry("150x200")
-        parent.resizable(False, False)
+        # parent.resizable(False, False)
 
         self.equation = tk.StringVar()
-        self.entry = tk.Entry(self.parent, textvariable=self.equation)
-        # FIXME: Replace with grid
-        self.entry.pack()
+        self.entry = ttk.Entry(self.parent, textvariable=self.equation, state="readonly")
+        self.entry.grid(row=0, column=0, columnspan=4)
 
-        self.button_clear = tk.Button(parent, text="CE", command=self.clear)
-        self.button_clear.pack()
-        self.button_0 = tk.Button(parent, text="0", command=lambda: self.button_press("0"))
-        self.button_0.pack()
-        self.button_1 = tk.Button(parent, text="1", command=lambda: self.button_press("1"))
-        self.button_1.pack()
-        self.button_plus = tk.Button(parent, text="+", command=lambda: self.button_press("+"))
-        self.button_plus.pack()
-        self.button_solve = tk.Button(parent, text="=", command=self.solve)
-        self.button_solve.pack()
+        buttons.create_buttons(self)
 
         # Bind keys to functions to allow keyboard input
         parent.bind('<Delete>', self.clear)
+        parent.bind('<BackSpace>', self.backspace)
         parent.bind('<Return>', self.solve)
+        parent.bind('<Key>', lambda event: self.button_press(event.char))
 
     def clear(self, event=None):
         self.equation.set("")
+
+    def backspace(self, event=None):
+        self.equation.set(self.equation.get()[:-1])
 
     def button_press(self, key_value, event=None):
         if re.match("^[0-9()+\-*/.]*$", key_value):
@@ -44,6 +44,7 @@ class Calculator(tk.Frame):
                 print("Syntax Error")
 
 
-root = tk.Tk()
-my_gui = Calculator(root)
-root.mainloop()
+if __name__ == "__main__":
+    root = tk.Tk()
+    my_gui = Calculator(root)
+    root.mainloop()

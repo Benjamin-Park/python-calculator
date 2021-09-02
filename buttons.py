@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 def create_buttons(self):
-    parent = self.parent
+    parent = self
 
     # Define buttons
     self.button_clear = tk.Button(parent, text="CE", command=self.clear, width=2)

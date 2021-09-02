@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
-
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 import re
+import sys
 
 import buttons
 
 
 class Calculator(tk.Frame):
     def __init__(self, parent):
+        super().__init__()
+
         self.parent = parent
         parent.title("Calculator")
-        parent.geometry("150x200")
-        # parent.resizable(False, False)
+        # parent.geometry("150x200")
+        parent.resizable(False, False)
 
         self.equation = tk.StringVar()
-        self.entry = ttk.Entry(self.parent, textvariable=self.equation, state="readonly")
-        self.entry.grid(row=0, column=0, columnspan=4)
+        self.entry = ttk.Entry(self, textvariable=self.equation, state="readonly")
+        self.entry.grid(row=0, column=0, columnspan=4, sticky="EW")
 
         buttons.create_buttons(self)
 
@@ -40,11 +43,14 @@ class Calculator(tk.Frame):
         if self.equation.get() != "":
             try:
                 self.equation.set(eval(self.equation.get()))
-            except SyntaxError:
-                print("Syntax Error")
+            except (SyntaxError, ZeroDivisionError) as error:
+                error_message = type(error).__name__
+                print(error_message)
+                tk.messagebox.showerror('Calculator Error', error_message)
 
 
 if __name__ == "__main__":
     root = tk.Tk()
-    my_gui = Calculator(root)
+    calculator_gui = Calculator(root)
+    calculator_gui.pack()
     root.mainloop()

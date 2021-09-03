@@ -3,18 +3,17 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 import re
-import sys
 
 import buttons
 
 
 class Calculator(tk.Frame):
     def __init__(self, parent):
+        self.__version__ = "1.0.0"
         super().__init__()
 
         self.parent = parent
         parent.title("Calculator")
-        # parent.geometry("150x200")
         parent.resizable(False, False)
 
         self.equation = tk.StringVar()
@@ -36,13 +35,19 @@ class Calculator(tk.Frame):
         self.equation.set(self.equation.get()[:-1])
 
     def button_press(self, key_value, event=None):
-        if re.match("^[0-9()+\-*/.]*$", key_value):
+        if re.match("^[0-9()+\\-*/.]*$", key_value):
             self.equation.set(self.equation.get() + key_value)
 
     def solve(self, event=None):
         if self.equation.get() != "":
             try:
-                self.equation.set(eval(self.equation.get()))
+                sanitised_equation = []
+                split_equation = re.split("([+\\-*/])", self.equation.get())
+                for expression in split_equation:
+                    sanitised_equation.append(expression.lstrip('0'))
+                sanitised_equation = ''.join(sanitised_equation)
+
+                self.equation.set(eval(sanitised_equation))
             except (SyntaxError, ZeroDivisionError) as error:
                 error_message = type(error).__name__
                 print(error_message)

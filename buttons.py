@@ -21,10 +21,10 @@ def create_buttons(self):
 
     self.button_decimal = tk.Button(parent, text=".", command=lambda: self.button_press("."), width=2)
 
-    self.button_plus = tk.Button(parent, text="+", command=lambda: self.button_press("+"), width=2, bg="lightgrey")
-    self.button_minus = tk.Button(parent, text="-", command=lambda: self.button_press("-"), width=2, bg="lightgrey")
-    self.button_multiply = tk.Button(parent, text="*", command=lambda: self.button_press("*"), width=2, bg="lightgrey")
-    self.button_divide = tk.Button(parent, text="/", command=lambda: self.button_press("/"), width=2, bg="lightgrey")
+    self.button_plus = tk.Button(parent, text="+", command=lambda: self.button_press("+"), width=2, bg="grey")
+    self.button_minus = tk.Button(parent, text="-", command=lambda: self.button_press("-"), width=2, bg="grey")
+    self.button_multiply = tk.Button(parent, text="*", command=lambda: self.button_press("*"), width=2, bg="grey")
+    self.button_divide = tk.Button(parent, text="/", command=lambda: self.button_press("/"), width=2, bg="grey")
     self.button_solve = tk.Button(parent, text="=", command=self.solve, width=2, bg="orange")
 
     # Draw buttons on screen

@@ -1,0 +1,19 @@
+{
+  "interface": "systemButtonFace",
+  "display": {
+    "fg": "systemButtonText",
+    "bg": "systemButtonFace"
+  },
+  "button": {
+    "fg": "systemButtonText",
+    "bg": "systemButtonFace"
+  },
+  "button_operator": {
+    "fg": "systemButtonText",
+    "bg": "grey"
+  },
+  "button_exec": {
+    "fg": "systemButtonText",
+    "bg": "orange"
+  }
+}

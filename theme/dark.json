@@ -1,0 +1,19 @@
+{
+  "interface": "#121212",
+  "display": {
+    "fg": "#ffffff",
+    "bg": "#2b2727"
+  },
+  "button": {
+    "fg": "#ffffff",
+    "bg": "#474444"
+  },
+  "button_operator": {
+    "fg": "#ffffff",
+    "bg": "#676565"
+  },
+  "button_exec": {
+    "fg": "#ffffff",
+    "bg": "#964f1f"
+  }
+}

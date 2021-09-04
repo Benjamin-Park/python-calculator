@@ -1,23 +1,29 @@
 #!/usr/bin/env python3
 import tkinter as tk
-from tkinter import ttk
 from tkinter import messagebox
 import re
+import json
+import configparser
 
 import buttons
 
 
 class Calculator(tk.Frame):
     def __init__(self, parent):
-        self.__version__ = "1.0.0"
-        super().__init__()
+        self.__version__ = "1.1.0"
+
+        config = configparser.ConfigParser()
+        config.read("config.conf")
+        self.theme = config.get("CONFIG", "theme")
+        self.theme_data = json.load(open(f"theme/{self.theme}.json", "r"))
+        super().__init__(bg=self.theme_data["interface"])
 
         self.parent = parent
         parent.title("Calculator")
         parent.resizable(False, False)
 
         self.equation = tk.StringVar()
-        self.entry = ttk.Entry(self, textvariable=self.equation, state="readonly")
+        self.entry = tk.Entry(self, textvariable=self.equation, state="readonly", fg=self.theme_data["display"]["fg"], readonlybackground=self.theme_data["display"]["bg"])
         self.entry.grid(row=0, column=0, columnspan=4, sticky="EW")
 
         buttons.create_buttons(self)

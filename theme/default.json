@@ -1,19 +1,19 @@
 {
-  "interface": "systemButtonFace",
+  "interface": "#f0f0f0",
   "display": {
-    "fg": "systemButtonText",
-    "bg": "systemButtonFace"
+    "fg": "#000000",
+    "bg": "#f0f0f0"
   },
   "button": {
-    "fg": "systemButtonText",
-    "bg": "systemButtonFace"
+    "fg": "#000000",
+    "bg": "#f0f0f0"
   },
   "button_operator": {
-    "fg": "systemButtonText",
-    "bg": "grey"
+    "fg": "#000000",
+    "bg": "#878585"
   },
   "button_exec": {
-    "fg": "systemButtonText",
-    "bg": "orange"
+    "fg": "#000000",
+    "bg": "#ffa500"
   }
 }

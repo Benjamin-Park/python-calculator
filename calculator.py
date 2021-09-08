@@ -4,16 +4,18 @@ from tkinter import messagebox
 import re
 import json
 import configparser
+import os
 
 import buttons
 
 
 class Calculator(tk.Frame):
     def __init__(self, parent):
-        self.__version__ = "1.1.0"
+        self.__version__ = "1.2.0"
 
         config = configparser.ConfigParser()
         config.read("config.conf")
+        self.decimal_precision = int(config.get("CONFIG", "precision"))
         self.theme = config.get("CONFIG", "theme")
         self.theme_data = json.load(open(f"theme/{self.theme}.json", "r"))
         super().__init__(bg=self.theme_data["interface"])
@@ -53,8 +55,8 @@ class Calculator(tk.Frame):
                     sanitised_equation.append(expression.lstrip('0'))
                 sanitised_equation = ''.join(sanitised_equation)
 
-                self.equation.set(eval(sanitised_equation))
-            except (SyntaxError, ZeroDivisionError) as error:
+                self.equation.set(round(eval(sanitised_equation), self.decimal_precision))
+            except (SyntaxError, ZeroDivisionError, TypeError) as error:
                 error_message = type(error).__name__
                 print(error_message)
                 tk.messagebox.showerror('Calculator Error', error_message)
@@ -62,6 +64,7 @@ class Calculator(tk.Frame):
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.attributes('-toolwindow', True) if os.name == "nt" else None  # Comment out this line restore normal window behaviour
     calculator_gui = Calculator(root)
     calculator_gui.pack()
     root.mainloop()

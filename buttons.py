@@ -4,10 +4,11 @@ import tkinter as tk
 def create_buttons(self):
     parent = self
 
-    # Define buttons
+    # Define clear buttons
     self.button_clear = tk.Button(parent, text="CE", command=self.clear, width=2, fg=self.theme_data["button"]["fg"], bg=self.theme_data["button"]["bg"])
     self.button_backspace = tk.Button(parent, text="B", command=self.backspace, width=2, fg=self.theme_data["button"]["fg"], bg=self.theme_data["button"]["bg"])
 
+	# Define Numerical buttons
     self.button_0 = tk.Button(parent, text="0", command=lambda: self.button_press("0"), width=2, fg=self.theme_data["button"]["fg"], bg=self.theme_data["button"]["bg"])
     self.button_1 = tk.Button(parent, text="1", command=lambda: self.button_press("1"), width=2, fg=self.theme_data["button"]["fg"], bg=self.theme_data["button"]["bg"])
     self.button_2 = tk.Button(parent, text="2", command=lambda: self.button_press("2"), width=2, fg=self.theme_data["button"]["fg"], bg=self.theme_data["button"]["bg"])
@@ -21,6 +22,7 @@ def create_buttons(self):
 
     self.button_decimal = tk.Button(parent, text=".", command=lambda: self.button_press("."), width=2, fg=self.theme_data["button"]["fg"], bg=self.theme_data["button"]["bg"])
 
+	# Defien Operator buttons
     self.button_plus = tk.Button(parent, text="+", command=lambda: self.button_press("+"), width=2, fg=self.theme_data["button_operator"]["fg"], bg=self.theme_data["button_operator"]["bg"])
     self.button_minus = tk.Button(parent, text="-", command=lambda: self.button_press("-"), width=2, fg=self.theme_data["button_operator"]["fg"], bg=self.theme_data["button_operator"]["bg"])
     self.button_multiply = tk.Button(parent, text="×", command=lambda: self.button_press("*"), width=2, fg=self.theme_data["button_operator"]["fg"], bg=self.theme_data["button_operator"]["bg"])
